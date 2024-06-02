@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" th:fragment="base(content)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Books by Mr.DaiGo, the mentalist</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<header class="bg-white border-bottom">
+	    <div class="container-fluid d-flex justify-content-between align-items-center py-2">
+	        <a href="/" class="home-link btn btn-link text-dark">
+	            Recommended Books by Mr.DaiGo, the mentalist
+	        </a>
+	        <a href="/search" class="btn btn-dark">
+	            登録画面
+	        </a>
+	    </div>
+	</header>
+    
+    <main th:insert="${content}">内容</main>
+    
+    <footer class="bg-light py-3 border-top">
+        <div class="container text-center">
+            <p><a href="/" class="text-dark">Recommended Books by Mr.DaiGo</a></p>
+			
+            <div class="d-flex text-center">
+				<ul>
+				  <li><a href="/about">このサイトについて</a></li>
+				  <li><a href="https://daigovideolab.jp/" target="_blank">Dラボへのリンク</a></li>
+				</ul>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout ::base(~{::body})}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Recommended Books by Mr.DaiGo</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<main class="container mt-5">
+		<div class="jumbotron text-center">
+			<h2>DaiGoさんがオススメする本をみんなで共有しよう！</h2>
+			<p>このサイトは、メンタリストDaiGoさんがオススメする本をみんなで登録し、共有するためのコミュニティです。</p>
+		</div>
+
+		<section class="my-5">
+			<h3 class="text-center">本の登録方法</h3>
+			<p>簡単に本を登録できます！以下の手順で登録しましょう：</p>
+			<ol>
+				<li>ISBNコードで検索</li>
+				<li>登録</li>
+			</ol>
+		</section>
+		<section class="my-5">
+			<p>
+				メンタリストDaiGoさんが日々、書籍を紹介してくれています。それをまとめたブログやサイトも多くあります。個人でメモした人も多いのではないでしょうか。私もその一人です。しかし、紹介してくれた書籍が多くあり、到底一人ではまとめきれない量になってきました。動画、書籍、ブログ、取材など様々なメディアで書籍を紹介されていますよね。すべてまとめられない。。
+				でも、一人じゃなくてみんなの力を合わせたらできるんじゃないのか？
+				そんな思い付きで始めたのがこのプロジェクトです。
+			</p>
+		</section>
+	</main>
+</body>
+
+</html>
