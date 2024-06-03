@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "test-setup": "echo 'No setup needed'",
+    "test": "./gradlew test"
+  }
+}
