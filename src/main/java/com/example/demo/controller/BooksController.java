@@ -3,10 +3,15 @@ package com.example.demo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.demo.entity.Book;
+import com.example.demo.form.IsbnForm;
+import com.example.demo.service.BooksService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BooksController {
 
+	private final BooksService booksService;
+	
 	@GetMapping()
 	public String returnBookListAsHome(Model model) {
 		return "book-list";
@@ -26,12 +33,14 @@ public class BooksController {
     }
 	
 	@PostMapping("/search")
-	public String searchBookResult(BindingResult bindingResult, RedirectAttributes attributes) {
+	public String searchBookResult(@Validated IsbnForm isbnForm, BindingResult bindingResult, RedirectAttributes attributes) {
 		
 		if (bindingResult.hasErrors()) {
 			return "search-save";
 		}
 		
+		Book book = booksService.searchBookFromGoogleAPI(isbnForm.getIsbn());
+		attributes.addFlashAttribute("book", book);
 		return "redirect:/search";
 	}
 	
