@@ -1,6 +1,5 @@
 package com.example.demo.externalApi.Impl;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,8 +13,8 @@ public class GoogleBooksApiImpl implements GoogleBooksApi{
 	
 	private final String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:%s&key=%s";
 	
-	@Value("${GOOGLE_BOOKS_API_KEY}")
-	private String apiKey;
+//	@Value("${google_books.apikey}")
+	private String apiKey = "AIzaSyABSkl0VF0rb0ozwE7nZLLZS7phgLyhWbk";
 	
 	@Override
 	public BooksApiResponse searchBookByIsbn(String isbn) {

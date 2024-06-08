@@ -1,7 +1,6 @@
 package com.example.demo.service.Impl;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.api.BooksApiResponse;
@@ -10,7 +9,6 @@ import com.example.demo.service.BooksService;
 
 
 @Service
-@Transactional
 public class BooksServiceImpl implements BooksService {
 	
 	private final GoogleBooksApi googleBooksApi;
