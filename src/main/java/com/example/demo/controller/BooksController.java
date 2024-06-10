@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +21,6 @@ public class BooksController {
 	private final BooksService booksService;
 	private final BooksRepositoryService booksRepositoryService;
 	
-	@Autowired
 	public BooksController(BooksService booksService, BooksRepositoryService booksRepositoryService) {
 		this.booksService = booksService;
 		this.booksRepositoryService = booksRepositoryService;
