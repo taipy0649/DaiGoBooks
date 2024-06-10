@@ -7,5 +7,10 @@
 		<!-- SELECT title, author, recommended_counts FROM books -->
 		SELECT * FROM books
 	</select>
-
+	
+	<!-- insert -->
+	<insert id="insert" parameterType="com.example.demo.entity.Book">
+		INSERT INTO books(title, isbn_10, isbn_13, image_url, author, created_at)
+		VALUES (#{title}, #{isbn_10}, #{isbn_13}, #{image_url}, #{author}, CURRENT_TIMESTAMP)
+	</insert>
 </mapper>
