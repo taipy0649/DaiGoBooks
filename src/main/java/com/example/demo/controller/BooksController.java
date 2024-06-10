@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,19 +12,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Book;
 import com.example.demo.form.IsbnForm;
+import com.example.demo.service.BooksRepositoryService;
 import com.example.demo.service.BooksService;
-
-import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/")
-@RequiredArgsConstructor
 public class BooksController {
 
 	private final BooksService booksService;
+	private final BooksRepositoryService booksRepositoryService;
+	
+	@Autowired
+	public BooksController(BooksService booksService, BooksRepositoryService booksRepositoryService) {
+		this.booksService = booksService;
+		this.booksRepositoryService = booksRepositoryService;
+	}
 	
 	@GetMapping()
 	public String returnBookListAsHome(Model model) {
+		model.addAttribute("books", booksRepositoryService.findAllBooks());
 		return "book-list";
 	}
 	
