@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -144,4 +145,45 @@ public class BooksControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("error"));
     }
+	
+	@Test
+	void testSaveBook_withIsbn10() throws Exception {
+		Book book = new Book();
+
+		doReturn(book).when(booksService).searchBookFromGoogleAPI("1234567890");
+		doReturn(true).when(booksRepositoryService).saveBook(book);
+
+		mockMvc.perform(post("/save")
+				.param("isbn_10", "1234567890")
+				.param("isbn_13", ""))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/search"));
+	}
+	
+	@Test
+	void testSaveBook_withIsbn13() throws Exception {
+		Book book = new Book();
+
+		doReturn(book).when(booksService).searchBookFromGoogleAPI("1234567890123");
+		doReturn(true).when(booksRepositoryService).saveBook(book);
+		mockMvc.perform(post("/save")
+				.param("isbn_10", "")
+				.param("isbn_13", "1234567890123"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/search"));
+	}
+
+	@Test
+    void testSaveBook_withEmptyIsbn() throws Exception {
+        mockMvc.perform(post("/save")
+                        .param("isbn_10", "")
+                        .param("isbn_13", ""))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/search"));
+
+        // 検証: searchBookFromGoogleAPI と saveBook は呼ばれない
+        Mockito.verifyNoInteractions(booksService);
+        Mockito.verifyNoInteractions(booksRepositoryService);
+	}
+
 }
