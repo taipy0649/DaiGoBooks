@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.demo.entity.Book;
+import com.example.demo.service.BooksRepositoryService;
 import com.example.demo.service.BooksService;
 
 
@@ -26,11 +30,54 @@ public class BooksControllerTest {
 	@MockBean
 	BooksService booksService;
 	
+	@MockBean
+	BooksRepositoryService booksRepositoryService;
+	
 	@Test
 	public void returnBookListAsHomeTest() throws Exception {
+		
+		Book book1 = new Book(
+				"1",
+				"Effective Java",
+				"0134685997",
+				"9780134685991",
+				"http://example.com/effective_java.jpg",
+				"Joshua Bloch",
+				150,
+				LocalDateTime.now());
+
+		Book book2 = new Book(
+				"2",
+				"Clean Code",
+				"0132350882",
+				"9780132350885",
+				"http://example.com/clean_code.jpg",
+				"Robert C. Martin",
+				200,
+				LocalDateTime.now());
+
+		Book book3 = new Book(
+				"3",
+				"The Pragmatic Programmer",
+				"020161622X",
+				"9780201616224",
+				"http://example.com/pragmatic_programmer.jpg",
+				"Andrew Hunt, David Thomas",
+				180,
+				LocalDateTime.now());
+
+		List<Book> books = new ArrayList<>();
+		books.add(book1);
+		books.add(book2);
+		books.add(book3);
+
+		doReturn(books).when(booksRepositoryService).findAllBooks();
+		
 		mockMvc.perform(get("/"))
 		.andExpect(status().isOk())
-		.andExpect(view().name("book-list"));
+		.andExpect(view().name("book-list"))
+		.andExpect(model().attributeExists("books"))
+		.andExpect(model().attribute("books", hasSize(3)));
 	}
 	
 	@Test
