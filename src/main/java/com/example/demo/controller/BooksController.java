@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Book;
+import com.example.demo.form.Isbn10And13Form;
 import com.example.demo.form.IsbnForm;
 import com.example.demo.service.BooksRepositoryService;
 import com.example.demo.service.BooksService;
@@ -50,11 +51,23 @@ public class BooksController {
 	}
 	
 	@PostMapping("/save")
-	public String saveBook(BindingResult bindingResult) {
+	public String saveBook(@Validated Isbn10And13Form form, BindingResult bindingResult) {
 		
 		if (bindingResult.hasErrors()) {
 			return "redirect:/search";
 		}
+		
+		String isbn;
+		if (form.getIsbn_10().length() == 10) {
+            isbn = form.getIsbn_10();
+        } else if (form.getIsbn_13().length() == 13) {
+            isbn = form.getIsbn_13();
+        } else {
+        	return "redirect:/";
+        }
+		
+		Book searchedBook = booksService.searchBookFromGoogleAPI(isbn);
+		booksRepositoryService.saveBook(searchedBook);
 		
 		return "redirect:/";
 	}
