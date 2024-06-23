@@ -30,7 +30,7 @@
 		<h2 class="mt-5">登録候補一覧</h2>
 		<p>登録候補が表示されます。入力したISBNコードが存在しない場合は下記に表示されません。</p>
 		<div class="container mt-5" th:if="${book != null}">
-			<div class="card">
+			<div class="m-3 shadow-sm" style="width: 400px;">
 				<div class="row no-gutters">
 					<div class="col-md-4">
 						<img class="card-img" th:src="${book.image_url}" alt="Book Cover">
