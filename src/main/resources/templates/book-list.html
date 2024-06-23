@@ -6,15 +6,17 @@
 </head>
 
 <body>
-	<main class="d-flex flex-column justify-content-center align-items-center text-center flex-grow-1 py-5">
-		<h1 class="mb-3">Recommended Books by Mr.DaiGo, the mentalist</h1>
-		<p class="mb-4">おすすめ本をすべてここに</p>
+	<main>
+		<section class="d-flex flex-column justify-content-center align-items-center text-center flex-grow-1 py-5">
+			<h1 class="mb-3">Recommended Books by Mr.DaiGo, the mentalist</h1>
+			<p class="mb-4">おすすめ本をすべてここに</p>
+		</section>
 		<div class="container">
 			<div class="row">
 				<div class="col d-flex justify-content-around" th:each="book : ${books}">
 					<div class="card m-3 shadow-sm" style="width: 400px;">
 						<div class="row g-0">
-							<div class="col-md-5">
+							<div class="col-md-5 d-flex justify-content-center">
 								<img th:src="${book.image_url}" class="img-fluid rounded-start" alt="Book cover">
 							</div>
 							<div class="col-md-7">
