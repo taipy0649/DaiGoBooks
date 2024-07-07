@@ -44,16 +44,15 @@
 
 	<div th:insert="${content}">内容</div>
 
-	<footer class="bg-light py-3 border-top">
-		<div class="container text-center">
+	<footer class="bg-light border-top d-flex flex-row">
+		<div class="m-3">
 			<p><a href="/" class="text-dark">Recommended Books by Mr.DaiGo</a></p>
-
-			<div class="d-flex text-center">
-				<ul>
-					<li><a href="/about">このサイトについて</a></li>
-					<li><a href="https://daigovideolab.jp/" target="_blank">Dラボへのリンク(外部サイト)</a></li>
-				</ul>
-			</div>
+		</div>
+		<div class="m-3">
+			<ul>
+				<li><a href="/about" class="text-dark">このサイトについて</a></li>
+				<li><a href="https://daigovideolab.jp/" target="_blank" class="text-dark">Dラボへのリンク(外部サイト)</a></li>
+			</ul>
 		</div>
 	</footer>
 	<!-- Bootstrap JS and dependencies -->
